@@ -138,7 +138,10 @@ if __name__ == "__main__":
 
         # SXp
         if WINDAGENT:
-            CSV_FILENAME = "Metrics" + os.sep + "New tests" + os.sep + CSV_FILENAME
+            NEW_PATH = "Metrics" + os.sep + "New tests"
+            if not os.path.exists(NEW_PATH):
+                os.makedirs(NEW_PATH)
+            CSV_FILENAME = NEW_PATH + os.sep + CSV_FILENAME
             SXpMetric(env, agents, wind_agents, K, net, [h_net, f_net], DEVICE, move=MOVE, number_scenarios=NUMBER_SCENARIOS,
                            extremum_reward=extremum_reward, csv_filename=CSV_FILENAME, render=RENDER, concise=MM_REWARD)
         else:
