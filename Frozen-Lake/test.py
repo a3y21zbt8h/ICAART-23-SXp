@@ -52,11 +52,20 @@ if __name__ == "__main__":
 
     #  Paths to store new SXP's scores
     if MAP_NAME == "4x4":
-        CSV_FILENAME = "Metrics"+ os.sep + "7 reachable states - 4x4" + os.sep + "New tests" + os.sep + CSV_FILENAME
+        PATH = "Metrics"+ os.sep + "7 reachable states - 4x4" + os.sep + "New tests"
+        if not os.path.exists(PATH):
+            os.makedirs(PATH)
+        CSV_FILENAME = PATH + os.sep + CSV_FILENAME
     elif MAP_NAME == "8x8":
-        CSV_FILENAME = "Metrics" + os.sep + "20 random states - 8x8" + os.sep + "New tests" + os.sep + CSV_FILENAME
+        PATH = "Metrics" + os.sep + "20 random states - 8x8" + os.sep + "New tests"
+        if not os.path.exists(PATH):
+            os.makedirs(PATH)
+        CSV_FILENAME = PATH + os.sep + CSV_FILENAME
     else:
-        CSV_FILENAME = "Metrics" + os.sep + "Other" + os.sep + CSV_FILENAME
+        PATH = "Metrics" + os.sep + "Other"
+        if not os.path.exists(PATH):
+            os.makedirs(PATH)
+        CSV_FILENAME = PATH + os.sep + CSV_FILENAME
 
     #  Envs initialisation
     env_windH = MyFrozenLake(behaviour="Hostile", map_name=MAP_NAME)
