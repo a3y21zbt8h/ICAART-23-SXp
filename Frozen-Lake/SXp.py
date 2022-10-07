@@ -42,7 +42,7 @@ def computeMetric(xp_value, env, obs, k, number_scenarios, model, mm_value, step
         vs_H = values
         vs_F = values
 
-    print("Reward P scenario : {}".format(psxp_value))
+    print("Reward P-scenario : {}".format(psxp_value))
     print("Step limit : {}, Reward HE-scenario : {}".format(step_limit_HE, HE_value))
     print("Step limit : {}, Reward FE-scenario : {}".format(step_limit_FE, FE_value))
 
@@ -63,9 +63,8 @@ def metrics(HE_value, FE_value, scenar_h_values, scenar_f_values, number_scenari
     if psxp:
         mean_values = sum(scenar_last_values) / len(scenar_last_values)
         mean_values = normalizedValue(mean_values)
-        print("P-score metric : Sum scenar rewards {} --- len {} --- nomalize mean {}".format(sum(scenar_last_values),
-                                                                                         len(scenar_last_values),
-                                                                                         mean_values))
+        #print("P-score metric : Sum scenar rewards {} --- len {} --- nomalize mean {}".format(sum(scenar_last_values),len(scenar_last_values),mean_values))
+
         # Compute SXps scores
         return HE_l.count(1) / number_scenarios, abs(psxp_value - mean_values), FE_l.count(1) / number_scenarios
     else:
@@ -277,7 +276,7 @@ def SXp(env, obs, model, k, wind_models, number_scenarios=5, render=True):
                 f_value_HE, step_limit_HE = E_scenario(env, obs, k, model, wind_models[0], mm_f_value_HE, render=render)
 
             #  ------------------------ P-scenario ----------------------------------------
-            question_P = "Do you want a P of the agent's move? "
+            question_P = "Do you want a P-scenario of the agent's move? "
             explanation_P = input(question_P)
 
             # Provide P-scenario
@@ -309,7 +308,7 @@ def SXp(env, obs, model, k, wind_models, number_scenarios=5, render=True):
                 if answer_metric in good_answers:
                     HE_score, P_score, FE_score = computeMetric([f_value_HE, f_value_P, f_value_FE], env, obs, k, number_scenarios, model, mm_f_value_FE, step_limit_HE, step_limit_FE)
                     print("For HE-scenario, percentage of worse scenarios over {} scenarios : {}".format(number_scenarios, HE_score))
-                    print("Cumulative reward difference between P scenario and the mean reward of  {} scenarios : {}".format(number_scenarios, P_score))
+                    print("Cumulative reward difference between P-scenario and the mean reward of  {} scenarios : {}".format(number_scenarios, P_score))
                     print("For FE-scenario, percentage of better scenarios over {} scenarios : {}".format(number_scenarios, FE_score))
 
             print("Go back to the current state of the problem!")
